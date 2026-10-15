@@ -1,17 +1,17 @@
-﻿@inherits LayoutComponentBase
+@inherits LayoutComponentBase
 
 <div class="page">
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="site-brand" href="">NanConsulting</a>
         </div>
+    </header>
 
-        <article class="content px-4">
-            @Body
-        </article>
-
-        <Footer CssClass="px-4" />
+    <main class="site-content">
+        @Body
     </main>
+
+    <Footer CssClass="site-footer" />
 </div>
 
 <div id="blazor-error-ui" data-nosnippet>
