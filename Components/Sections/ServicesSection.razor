@@ -1,0 +1,25 @@
+<section class="services-section">
+    <h2 class="section-title">Servicios</h2>
+
+    <div class="services-grid">
+        @foreach (var service in _services)
+        {
+            <article class="service-card">
+                <h3>@service.Title</h3>
+                <p>@service.Description</p>
+            </article>
+        }
+    </div>
+</section>
+
+@code {
+    private sealed record ServiceItem(string Title, string Description);
+
+    private readonly List<ServiceItem> _services =
+    [
+        new("Derecho corporativo", "Constitución de sociedades, contratos y gobierno corporativo."),
+        new("Litigio civil y mercantil", "Representación en controversias ante juzgados y tribunales."),
+        new("Derecho laboral", "Asesoría preventiva y defensa en conflictos patronales."),
+        new("Cumplimiento regulatorio", "Auditorías y acompañamiento ante autoridades.")
+    ];
+}

@@ -1,0 +1,9 @@
+.about-section {
+    margin-bottom: 2.5rem;
+    max-width: 70ch;
+}
+
+    .about-section p {
+        color: #495057;
+        line-height: 1.6;
+    }

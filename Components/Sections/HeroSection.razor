@@ -1,0 +1,21 @@
+<section class="hero-section">
+    <Carousel Items="_slides" TItem="SlideItem">
+        <ItemTemplate Context="slide">
+            <div class="hero-slide">
+                <h2>@slide.Title</h2>
+                <p>@slide.Description</p>
+            </div>
+        </ItemTemplate>
+    </Carousel>
+</section>
+
+@code {
+    private sealed record SlideItem(string Title, string Description);
+
+    private readonly List<SlideItem> _slides =
+    [
+        new("Asesoría legal integral", "Acompañamos a tu empresa en cada decisión jurídica."),
+        new("Litigio estratégico", "Defendemos tus intereses con experiencia comprobada."),
+        new("Consultoría corporativa", "Prevenimos riesgos antes de que se conviertan en problemas.")
+    ];
+}
