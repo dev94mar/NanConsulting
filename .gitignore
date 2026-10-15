@@ -1,0 +1,22 @@
+## .NET
+bin/
+obj/
+out/
+
+## Visual Studio / Rider / VS Code
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+
+## Build results
+[Dd]ebug/
+[Rr]elease/
+
+## Logs
+*.log
+
+## OS
+.DS_Store
+Thumbs.db

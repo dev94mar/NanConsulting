@@ -1,0 +1,69 @@
+@typeparam TItem
+@implements IDisposable
+
+<div class="carousel">
+    <div class="carousel-track">
+        @for (var i = 0; i < Items.Count; i++)
+        {
+            var index = i;
+            <div class="carousel-slide @(index == _activeIndex ? "active" : "")">
+                @ItemTemplate(Items[index])
+            </div>
+        }
+    </div>
+
+    @if (Items.Count > 1)
+    {
+        <button class="carousel-control prev" type="button" @onclick="Previous" aria-label="Anterior">&#10094;</button>
+        <button class="carousel-control next" type="button" @onclick="Next" aria-label="Siguiente">&#10095;</button>
+
+        <div class="carousel-dots">
+            @for (var i = 0; i < Items.Count; i++)
+            {
+                var index = i;
+                <button type="button"
+                        class="carousel-dot @(index == _activeIndex ? "active" : "")"
+                        aria-label="Ir a la diapositiva @(index + 1)"
+                        @onclick="() => GoTo(index)">
+                </button>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public IReadOnlyList<TItem> Items { get; set; } = Array.Empty<TItem>();
+
+    [Parameter, EditorRequired]
+    public RenderFragment<TItem> ItemTemplate { get; set; } = default!;
+
+    [Parameter]
+    public TimeSpan Interval { get; set; } = TimeSpan.FromSeconds(5);
+
+    [Parameter]
+    public bool AutoPlay { get; set; } = true;
+
+    private int _activeIndex;
+    private Timer? _timer;
+
+    protected override void OnInitialized()
+    {
+        if (AutoPlay && Items.Count > 1)
+        {
+            _timer = new Timer(_ => InvokeAsync(Next), null, Interval, Interval);
+        }
+    }
+
+    private void Next() => GoTo((_activeIndex + 1) % Items.Count);
+
+    private void Previous() => GoTo((_activeIndex - 1 + Items.Count) % Items.Count);
+
+    private void GoTo(int index)
+    {
+        _activeIndex = index;
+        StateHasChanged();
+    }
+
+    public void Dispose() => _timer?.Dispose();
+}
