@@ -1,13 +1,17 @@
-<section class="services-section">
+<section class="services-section mb-4">
     <h2 class="section-title">Servicios</h2>
 
-    <div class="services-grid">
+    <div class="row g-4">
         @foreach (var service in _services)
         {
-            <article class="service-card">
-                <h3>@service.Title</h3>
-                <p>@service.Description</p>
-            </article>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <article class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title h5" style="color:#052767;">@service.Title</h3>
+                        <p class="card-text text-secondary mb-0">@service.Description</p>
+                    </div>
+                </article>
+            </div>
         }
     </div>
 </section>
